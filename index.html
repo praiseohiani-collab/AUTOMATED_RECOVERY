@@ -1,1 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Found Student ID | CONFLUENCE UNIVERSITY OF SCIENCE AND TECHNOLOGY OSARA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 20px; }
+        .container { text-align: center; border: 1px solid #ddd; border-radius: 10px; padding: 30px; }
+        .university-header { color: #003366; font-size: 24px; margin-bottom: 20px; }
+        .instructions { background: #f8f9fa; padding: 20px; border-radius: 5px; margin: 20px 0; }
+        .step { text-align: left; margin: 15px 0; }
+        .location-list { list-style: none; padding: 0; }
+        .location-list li { padding: 8px; border-bottom: 1px solid #eee; }
+        .footer { margin-top: 30px; font-size: 12px; color: #666; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="university-header"> CONFLUENCE UNIVERSITY OF SCIENCE AND TECHNOLOGY OSARA</div>
+        <h1>Thank you for finding this ID!</h1>
+        
+        <div class="instructions">
+            <p><strong>Please follow these steps:</strong></p>
+            <div class="step">1. <strong>Do not post on social media</strong> - protect the student's privacy.</div>
+            <div class="step">2. <strong>Hand it to any campus staff member</strong> at:</div>
+            <ul class="location-list">
+                <li> Main Library Front Desk</li>
+                <li> Student Union Cafeteria Cashier</li>
+                <li> Campus Security Office</li>
+                <li> Department Office Reception</li>
+            </ul>
+            <div class="step">3. <strong>The staff will securely notify the student</strong> using our system.</div>
+        </div>
+        
+        <div id="qrInfo" style="display: none; background: #e8f5e9; padding: 15px; border-radius: 5px; margin: 20px 0;">
+            <p><strong>ID detected:</strong> <span id="studentId">[Loading...]</span></p>
+            <p>This ID has been registered in our recovery system. The student will be notified once a staff member logs it.</p>
+        </div>
+        
+        <div class="footer">
+            <p>This is a student project pilot. Questions? Email: project-team@university.edu</p>
+            <p>Last updated: <span id="currentDate"></span></p>
+        </div>
+    </div>
 
+    <script>
+        // Get ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const studentId = urlParams.get('id');
+        
+        // Update page if ID exists
+        if (studentId) {
+            document.getElementById('qrInfo').style.display = 'block';
+            document.getElementById('studentId').textContent = studentId;
+            
+            // Log the scan (we'll simulate this by opening a tracking pixel)
+            const logUrl = `https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec?action=finder_scan&id=${studentId}`;
+            new Image().src = logUrl;
+        }
+        
+        // Update date
+        document.getElementById('currentDate').textContent = new Date().toLocaleDateString();
+    </script>
+</body>
+</html>
